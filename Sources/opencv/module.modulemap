@@ -1,0 +1,3 @@
+module opencv {
+  umbrella header "opencv.h"
+}
