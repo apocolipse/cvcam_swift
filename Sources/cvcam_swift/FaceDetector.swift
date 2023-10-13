@@ -35,10 +35,9 @@ actor FaceDetector {
     cv.cvtColor(.init(img), .init(gray), 6, 1)
 
     // resize the grayscale image
-    let fx = 1.0 / scale
     let small = cv.Mat(Int32(Double(img.rows) * scale),
                        Int32(Double(img.cols) * scale), 0)
-    cv.resize(.init(gray), .init(small), .init(), fx, fx, 1)
+    cv.resize(.init(gray), .init(small), .init(), scale, scale, 1)
     cv.equalizeHist(.init(small), .init(small))
     
     // detect faces of different sizes using cascade classifier
@@ -64,8 +63,8 @@ actor FaceDetector {
     for faceRect in faces {
       let color = cv.Scalar(255,0,0,0)
       cv.rectangle(.init(img),
-                   faceRect.origin.scaled(by: scale),
-                   faceRect.antiOrigin.scaled(by: scale),
+                   faceRect.origin.scaled(by: 1/scale),
+                   faceRect.antiOrigin.scaled(by: 1/scale),
                    color, 3, 8, 0)
       
     }

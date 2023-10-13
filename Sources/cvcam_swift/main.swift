@@ -9,7 +9,8 @@ func cam_in() async throws {
   // CAP_AVFOUNDATION = 1200, index 1 on new macs as 0 is cont. cam
   var cap = cv.VideoCapture.init(1, 1200)
 
-  let detector = FaceDetector(cascade: .init("haarcascade_frontalface_default.xml"))
+  let detector = FaceDetector(cascade: .init("haarcascade_frontalface_default.xml"),
+                              scale: 0.25)
   
   // buffer
   var frame = cv.Mat.init()
