@@ -31,13 +31,13 @@ actor FaceDetector {
   
   private func _detect(img: cv.Mat) {
     // convert to gray
-    var gray = cv.Mat(img.rows, img.cols, 0) // CV_8UC1 = 0, alloc in swift else leak
+    let gray = cv.Mat(img.rows, img.cols, 0) // CV_8UC1 = 0, alloc in swift else leak
     cv.cvtColor(.init(img), .init(gray), 6, 1)
 
     // resize the grayscale image
     let fx = 1.0 / scale
-    var small = cv.Mat(cvRound(Double(img.rows) * scale), 
-                       cvRound(Double(img.cols) * scale), 0)
+    let small = cv.Mat(Int32(Double(img.rows) * scale),
+                       Int32(Double(img.cols) * scale), 0)
     cv.resize(.init(gray), .init(small), .init(), fx, fx, 1)
     cv.equalizeHist(.init(small), .init(small))
     
